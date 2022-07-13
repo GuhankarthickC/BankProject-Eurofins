@@ -1,0 +1,162 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model IEnumerable<BankProj.BankApplication.TransactionDetail>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#myselection').on('change', function () {
+                var demovalue = $(this).val();
+                $("div.myDiv").hide();
+                $("#show" + demovalue).show();
+            });
+        });
+    </script>
+</head>
+<div class="form-group row">
+    <label for="inputselect" class="col-sm-3 col-form-label">Type of Transaction</label>
+    <div class="col-sm-3">
+        <select id="myselection">
+            <option>Select Option</option>
+            <option value="Credit">Credit</option>
+            <option value="Debit">Debit</option>
+        </select>
+    </div>
+</div>
+<div id="showCredit" class="myDiv" style="display:none">
+    <div class="col-md-12">
+        <table class="table table-sm">
+            <thead class="thead-dark">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TransactionId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.MadeBy)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TransactionAmount)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TransactionType)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Date)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Status)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Balance)
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="bg-light">
+                @foreach (var item in Model)
+                {
+                    @if (item.MadeBy == ViewBag.name && item.TransactionType=="Credit")
+                    {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TransactionId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MadeBy)
+                    </td>
+                    <td>
+                        Rs. @Html.DisplayFor(modelItem => item.TransactionAmount)
+                    </td>
+                    <td class="bg-success">
+                        @Html.DisplayFor(modelItem => item.TransactionType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td class="bg-success">
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        Rs. @Html.DisplayFor(modelItem => item.Balance)
+                    </td>
+                </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<div id="showDebit" class="myDiv" style="display:none">
+    <div class="col-md-12">
+        <table class="table table-sm">
+            <thead class="thead-dark">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TransactionId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.MadeBy)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.MadeTo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TransactionAmount)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TransactionType)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Date)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Status)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Balance)
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="bg-light">
+                @foreach (var item in Model)
+                {
+                    @if (item.MadeBy == ViewBag.name && item.TransactionType == "Debit")
+                    {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TransactionId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MadeBy)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MadeTo)
+                    </td>
+                    <td>
+                        Rs. @Html.DisplayFor(modelItem => item.TransactionAmount)
+                    </td>
+                    <td class="bg-danger">
+                        @Html.DisplayFor(modelItem => item.TransactionType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td class="bg-danger">
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        Rs. @Html.DisplayFor(modelItem => item.Balance)
+                    </td>
+                </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="text-center">
+    <a href="@Url.Action("Def", "Home")">Back to Main Menu</a>
+</div>
+
+
+

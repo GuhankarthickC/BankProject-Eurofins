@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    ViewBag.MetaRefresh = "<meta http-equiv='refresh' content='0;url=" + Url.Action("Def", "Home") + "' />";
+}
+else
+{
+<div class="row">
+    <div class="col-md-6">
+        <img src="~/Images/bank.png" height="450" width="450" alt="bank image" />
+    </div>
+    <div class="col-md-6 text-center">
+        <div class="card text-white bg-warning" style="max-width: 40rem;">
+            <div class="card-header">Login</div>
+            <div class="card-body text-white">
+                <h5 class="card-title">Existing user? Login..</h5>
+                <p class="card-text">If you're a pre existing customer kindly login to proceed further</p>
+                <a class="nav-link text-uppercase btn-info" asp-area="Identity" asp-page="/Account/Login">Login</a>
+            </div>
+        </div>
+        <hr />
+        <br />
+        <div class="card text-white bg-info" style="max-width: 40rem;">
+            <div class="card-header">Register</div>
+            <div class="card-body text-white">
+                <h5 class="card-title">Create a new user account</h5>
+                <p class="card-text">Register to enjoy next-gen hassle free banking by a click</p>
+                <a class="nav-link  btn-warning" asp-area="Identity" asp-page="/Account/Register">Register</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+}
+
+
+

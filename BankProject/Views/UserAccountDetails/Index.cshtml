@@ -1,0 +1,67 @@
+﻿@model IEnumerable<BankProj.BankApplication.UserAccountDetail>
+@{
+    ViewData["Title"] = "Index";
+}
+@foreach (var item in Model)
+{
+    @if (User.Identity.Name.ToLower() == item.Email.ToLower())
+    {
+        ViewBag.flag = true;
+        break;
+    }
+    else
+    {
+        ViewBag.flag = false;
+    }
+
+}
+@if (ViewBag.flag)
+{
+<div class="row">
+    <div class="col-md-6">
+        <div class="card" style="width: 350px;">
+            <img src="~/Images/bank-account.png" class="card-img-top" alt="...">
+            <div class="card-body text-center">
+                <h5 class="card-title">Your Account Details</h5>
+                <p class="card-text">Shows your profile and details registered.</p>
+                <a asp-route-id="@User.Identity.Name" asp-area="UserAccountDetail" asp-action="Details" class="btn btn-primary">My Account</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card bg-dark text-white" style="max-width: 40rem;">
+            <img class="card-img" src="~/Images/mobile-banking.png" alt="Card image">
+            <div class="card-img-overlay">
+                <h5 class="card-title">Existing customer..</h5>
+                <p class="card-text">You're our previleged customer! Welcome..</p>
+                <p class="card-text">Kindly click on My Account to manipulate your profile</p>
+            </div>
+        </div>
+    </div>
+</div>
+}
+else
+{
+<div class="row">
+    <div class="col-md-6">
+        <div class="card" style="width: 350px;">
+            <img src="~/Images/piggy-bank.png" class="card-img-top" alt="...">
+            <div class="card-body text-center">
+                <h5 class="card-title">Create a New Account</h5>
+                <p class="card-text">Enjoy a hassle free account creation by clicking the below create button.</p>
+                <a asp-area="UserAccountDetail" asp-action="Create" class="btn btn-primary">Create</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card bg-dark text-white" style="max-width: 40rem;">
+            <img class="card-img" src="~/Images/error-404.png" alt="Card image">
+            <div class="card-img-overlay">
+                <h5 class="card-title">Oopsiee..!</h5>
+                <p class="card-text">It seems you haven't created a account with us yet..</p>
+                <p class="card-text">Kindly click on create to open a account with us</p>
+            </div>
+        </div>
+    </div>
+</div>
+}

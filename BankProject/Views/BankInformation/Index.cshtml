@@ -1,0 +1,92 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Payment's Page";
+
+}
+@model BankProj.BankApplication.BankInformation
+
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#myselection').on('change', function () {
+                var demovalue = $(this).val();
+                $(".myDiv").hide();
+                $("#show" + demovalue).show();
+            });
+        });
+    </script>
+</head>
+<h2 class="text-md-center">@ViewBag.Title</h2>
+<hr />
+<div class="form-group row">
+    <label for="inputselect" class="col-sm-3 col-form-label">Enter the Type of Transaction</label>
+    <div class="col-sm-3">
+        <select id="myselection">
+            <option>Select Option</option>
+            <option value="Credit">Credit</option>
+            <option value="Debit">Debit</option>
+        </select>
+    </div>
+</div>
+<div id="showCredit" class="myDiv" style="display:none">
+    <div class="row">
+        <div class="col-4">
+            <h3 class="text-center">Your Account</h3>
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr><th scope="row">Account Number</th><td>@Html.DisplayFor(model => model.AccountNumber)</td></tr>
+                    <tr><th scope="row">Bank Name</th><td>@Html.DisplayFor(model => model.BankName)</td></tr>
+                    <tr><th scope="row">Account Type</th><td> @Html.DisplayFor(model => model.AccountType)</td></tr>
+                    <tr><th scope="row">IFSC Code</th><td>@Html.DisplayFor(model => model.Ifsccode)</td></tr>
+                    <tr><th scope="row">Balance</th><td>@Html.DisplayFor(model => model.Balance)</td></tr>
+                </thead>
+            </table>
+        </div>
+        <div class="col-4">
+            <form asp-action="Index">
+                <label for="creditamount" class="control-label">Enter the amount to be credited</label>
+                <input id="creditamount" type="number" class="form-control" name="creditamount" /><br />
+                <div class="text-md-center">
+                    <input type="submit" value="Credit" class="btn btn-warning" onclick="return alert('Amount credited successfully');" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="showDebit" class="myDiv" style="display:none">
+    <div class="row">
+        <div class="col-4">
+            <h3 class="text-center">Sender's Account</h3>
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr><th scope="row">Account Number</th><td>@Html.DisplayFor(model => model.AccountNumber)</td></tr>
+                    <tr><th scope="row">Bank Name</th><td>@Html.DisplayFor(model => model.BankName)</td></tr>
+                    <tr><th scope="row">Account Type</th><td> @Html.DisplayFor(model => model.AccountType)</td></tr>
+                    <tr><th scope="row">IFSC Code</th><td>@Html.DisplayFor(model => model.Ifsccode)</td></tr>
+                    <tr><th scope="row">Balance</th><td>@Html.DisplayFor(model => model.Balance)</td></tr>
+                </thead>
+            </table>
+        </div>
+        <div class="col-4">
+            <h3 class="text-center">Receiver's Account</h3>
+            <form asp-action="Debit">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr><th scope="row">Account Number</th><td><input id="accno" type="number" class="form-control" name="accno" /></td></tr>
+                        <tr><th scope="row">Bank Name</th><td><input id="bankname" type="text" class="form-control" name="bankname" /></td></tr>
+                        <tr><th scope="row">IFSC Code</th><td><input id="ifsc" type="text" class="form-control" name="ifsc" /></td></tr>
+                        <tr><th scope="row">Receiver's Name</th><td><input id="receivername" type="text" class="form-control" name="receivername" /></td></tr>
+                        <tr><th scope="row">Amount to sent</th><td><input id="debitamount" type="number" class="form-control" name="debitamount" /></td></tr>
+                    </thead>
+                </table>
+                <div class="text-md-center">
+                    <input type="submit" value="Send" class="btn btn-warning" onclick="return alert('Amount debited successfully');" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
